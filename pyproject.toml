@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bookstore-fastapi-api"
+version = "0.1.0"
+description = "trying out fast api"
+authors = ["MrMika96 <mikamc1996@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.104.1"
+uvicorn = {extras = ["all"], version = "^0.23.2"}
+sqlalchemy = "^2.0.23"
+psycopg2-binary = "^2.9.9"
+alembic = "^1.12.1"
+python-multipart = "^0.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
