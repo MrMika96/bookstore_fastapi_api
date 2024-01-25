@@ -4,15 +4,9 @@ from fastapi import Depends, FastAPI, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 
-from books import (
-    crud as books_crud,
-    schemas as books_schemas
-)
+from books import crud as books_crud, schemas as books_schemas
 from db.base_class import Base
-from users import (
-    crud as users_crud,
-    schemas as users_schemas
-)
+from users import crud as users_crud, schemas as users_schemas
 from db.session import SessionLocal, engine
 
 Base.metadata.create_all(bind=engine)
@@ -31,7 +25,10 @@ def get_db():
 
 
 @app.post("/token")
-async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], db: Session = Depends(get_db)):
+async def login(
+    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    db: Session = Depends(get_db),
+):
     user = users_crud.get_user_by_username(db, form_data.username)
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")

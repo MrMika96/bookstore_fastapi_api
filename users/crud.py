@@ -36,7 +36,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         username=user.username,
         full_name=user.full_name,
         email=user.email,
-        hashed_password=fake_pass
+        hashed_password=fake_pass,
     )
     db.add(db_user)
     db.commit()
@@ -63,7 +63,7 @@ async def get_current_user(db: Session, token: Annotated[str, Depends(oauth2_sch
 
 
 async def get_current_active_user(
-    current_user: Annotated[schemas.User, Depends(get_current_user)]
+    current_user: Annotated[schemas.User, Depends(get_current_user)],
 ):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")

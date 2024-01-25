@@ -1,7 +1,4 @@
-from sqlalchemy import (
-    Column, Integer,
-    String, Boolean
-)
+from sqlalchemy import Column, Integer, String, Boolean
 from sqlalchemy.orm import relationship
 
 from db.base_class import Base
@@ -18,4 +15,3 @@ class User(Base):
     is_active = Column(Boolean, default=True)
 
     books = relationship("Book", back_populates="author")
-
